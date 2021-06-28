@@ -16,7 +16,7 @@ class CreateOrderCategoriesTable extends Migration
         Schema::create('order_categories', function (Blueprint $table) {
             $table->integer('id', true);
             $table->integer('user_id')->nullable();
-            $table->string('name', 50)->nullable()->unique('name');
+            $table->string('name', 50)->nullable()->unique();
             $table->mediumText('description')->nullable();
             $table->string('remember_token')->nullable();
             $table->integer('active')->nullable()->default(1);

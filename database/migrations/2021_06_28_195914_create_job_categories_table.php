@@ -17,7 +17,7 @@ class CreateJobCategoriesTable extends Migration
             $table->integer('id', true);
             $table->string('uuid', 100)->nullable();
             $table->integer('user_id')->default(1)->index('FK_job_categories_users');
-            $table->string('name', 50)->default('')->unique('title');
+            $table->string('name', 50)->default('')->unique();
             $table->mediumText('description');
             $table->integer('active')->nullable()->default(1);
             $table->integer('archived')->nullable()->default(0);
