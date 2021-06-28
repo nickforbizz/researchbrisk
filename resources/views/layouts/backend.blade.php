@@ -7,6 +7,9 @@
 	<title>ResearchBrisk Admin Dashboard</title>
 	<meta name="csrf_token" content="{{ csrf_token() }}" />
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+	
 	<link rel="icon" href="https://themekita.com/demo-atlantis-lite-bootstrap/livepreview/examples/assets/img/icon.ico" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
