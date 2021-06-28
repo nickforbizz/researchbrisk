@@ -1,0 +1,20 @@
+
+
+.fa-icon{
+	cursor: pointer;
+}
+
+.input_msg{
+	color: red;
+}
+
+.modal-body{
+	padding: 0 2rem;
+	max-height: 90vh;
+	overflow-y: scroll;
+}
+
+@media screen and (max-width: 576px){
+	
+}
+
