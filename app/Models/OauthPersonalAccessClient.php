@@ -22,6 +22,6 @@ class OauthPersonalAccessClient extends Model
      * 
      * @var string
      */
-    protected $connection = 'mysql';
+    protected $connection = 'pgsql';
 
 }

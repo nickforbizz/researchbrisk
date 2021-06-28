@@ -48,7 +48,7 @@ class User extends Authenticatable
      * 
      * @var string
      */
-    protected $connection = 'mysql';
+    protected $connection = 'pgsql';
 
      /**
      * The attributes that should be hidden for arrays.

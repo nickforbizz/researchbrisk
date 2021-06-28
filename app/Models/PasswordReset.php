@@ -21,6 +21,6 @@ class PasswordReset extends Model
      * 
      * @var string
      */
-    protected $connection = 'mysql';
+    protected $connection = 'pgsql';
 
 }

@@ -39,7 +39,7 @@ class BlogTagsPivot extends Model
      * 
      * @var string
      */
-    protected $connection = 'mysql';
+    protected $connection = 'pgsql';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
