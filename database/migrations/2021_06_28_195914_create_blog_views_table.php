@@ -18,7 +18,7 @@ class CreateBlogViewsTable extends Migration
             $table->integer('blog_id')->default(0);
             $table->string('host', 150)->default('0');
             $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->default('0000-00-00 00:00:00');
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
