@@ -30,6 +30,12 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if(Auth::user()->active != 1){
+            Auth::logout();
+            return redirect('login')->withErrors(['Your account is inactive, contact adimin to activate your account']);
+            return redirect('/blog_category');
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
@@ -49,6 +55,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

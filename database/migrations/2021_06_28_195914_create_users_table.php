@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->text('password');
             $table->string('image_file', 400)->default('public/imgs/users/default.png');
             $table->integer('status')->default(1);
+            $table->integer('active')->default(0);
             $table->integer('archived')->default(0);
             $table->char('admin', 1)->default('N');
             $table->timestamp('created_at')->useCurrent();

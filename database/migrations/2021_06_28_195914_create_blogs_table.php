@@ -16,9 +16,9 @@ class CreateBlogsTable extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->integer('id', true);
             $table->integer('user_id')->default(0)->index('FK_blogs_users');
+            $table->string('uuid', 100)->unique();
             $table->integer('blog_category_id')->default(0)->index('FK_blogs_blog_categories');
-            $table->string('uuid', 500)->unique('rowid');
-            $table->string('slug', 70)->unique('slug');
+            $table->string('slug', 70)->unique();
             $table->mediumText('title');
             $table->text('description');
             $table->text('body');
