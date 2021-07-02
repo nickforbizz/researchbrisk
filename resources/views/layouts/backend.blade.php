@@ -275,20 +275,21 @@
 										<div class="user-box">
 											<div class="avatar-lg"><img src="{{ asset('backend/img/profile.jpg') }}" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
-												<h4>Hizrian</h4>
-												<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+												<h4>{{ Auth::user()->name }}</h4>
+												<p class="text-muted">{{ Auth::user()->email }}</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">My Profile</a>
-										<a class="dropdown-item" href="#">My Balance</a>
 										<a class="dropdown-item" href="#">Inbox</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">Account Setting</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Logout</a>
+										<form action="{{ route('logout') }}" method="post">
+											<input class="dropdown-item" type="submit" value="Logout"/>
+										</form>
 									</li>
 								</div>
 							</ul>
@@ -310,7 +311,7 @@
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Hizrian
+									{{ Auth::user()->name }}
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -427,9 +428,10 @@
                         </li>
 
                         <li class="nav-item">
-							<a href="#blogs">
-								<p>Logout</p>
-							</a> 
+							<form action="{{ route('logout') }}" method="post">
+								@csrf
+								<button type="submit" class="btn btn-primary float-right">Logout</button>
+							</form>
                         </li>
 					
 					</ul>

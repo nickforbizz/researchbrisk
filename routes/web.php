@@ -12,7 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+require __DIR__.'/auth.php';
+
+
 Route::get('/klove/{toString}', "KloveController@index");
+
+
+
+
 
 
 Route::get('/', 'frontend\frontendController@welcome')->name('welcome');
@@ -123,4 +132,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-require __DIR__.'/auth.php';

@@ -41,7 +41,7 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $fillable = ['email', 'remember_token', 'user_level', 'name', 'password', 'image_file', 'status', 'archived', 'admin', 'created_at', 'updated_at', 'email_verified_at'];
+    protected $fillable = ['email', 'remember_token', 'user_level', 'name', 'password', 'image_file', 'status', 'active', 'archived', 'admin', 'created_at', 'updated_at', 'email_verified_at'];
 
     /**
      * The connection name for the model.
