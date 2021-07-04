@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="{{ asset('backend/font-awesome-4.7.0/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('common/css/toastr.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('common/css/select2.min.css') }}">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 	<style>
         body{
             /* background: #f1f1f1; */
@@ -64,7 +65,7 @@
 			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
 				
 				<div class="container-fluid">
-					<div class="collapse" id="search-nav">
+					<!-- <div class="collapse" id="search-nav">
 						<form class="navbar-left navbar-form nav-search mr-md-3">
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -75,7 +76,7 @@
 								<input type="text" placeholder="Search ..." class="form-control">
 							</div>
 						</form>
-					</div>
+					</div> -->
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						<li class="nav-item toggle-nav-search hidden-caret">
 							<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
@@ -95,7 +96,7 @@
 								</li>
 								<li>
 									<div class="message-notif-scroll scrollbar-outer">
-										<div class="notif-center">
+													<div class="notif-center">
 											<a href="#">
 												<div class="notif-img"> 
 													<img src="{{ asset('backend/img/jm_denis.jpg') }}" alt="Img Profile">
@@ -287,8 +288,9 @@
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">Account Setting</a>
 										<div class="dropdown-divider"></div>
-										<form action="{{ route('logout') }}" method="post">
-											<input class="dropdown-item" type="submit" value="Logout"/>
+										<form action="{{ route('logout') }}" method="post" class="">
+											@csrf
+											<button type="submit" class="dropdown-item">Logout</button>
 										</form>
 									</li>
 								</div>
@@ -395,6 +397,7 @@
 							</div>
 						</li>
 
+						@role('admin')
 						<li class="nav-item {{ (request()->routeIs('job*')) ? 'active' : '' }}">
 							<a data-toggle="collapse" href="#jbs">
 								<p>Jobs</p>
@@ -422,15 +425,16 @@
 						</li>
 
                         <li class="nav-item">
-							<a href="#settings">
+							<a href="{{ route('settings') }}">
 								<p>Settings</p>
 							</a> 
                         </li>
+						@endrole
 
                         <li class="nav-item">
-							<form action="{{ route('logout') }}" method="post">
+							<form action="{{ route('logout') }}" method="post" class="mt-4">
 								@csrf
-								<button type="submit" class="btn btn-primary float-right">Logout</button>
+								<button type="submit" class="btn nav-item">Logout</button>
 							</form>
                         </li>
 					
@@ -537,10 +541,17 @@
 	<script src="{{ asset('backend/js/atlantis.min.js') }}"></script>
 	<script src="{{ asset('common/js/toastr.min.js') }}"></script>
 	<script src="{{ asset('common/js/select2.min.js') }}"></script>
+	
+
 
 
 
 	<script>
+
+		$('.select2').select2({
+			theme: 'bootstrap4',
+			placeholder: 'choose your option(s)'
+		});
 
 		// delete item with id provided
 		$("#del_item").click((e) => {

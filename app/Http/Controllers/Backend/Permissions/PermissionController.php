@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Academics;
+namespace App\Http\Controllers\Backend\Permissions;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
-use App\Models\OrderCategory;
 
-class CategoryController extends Controller
+use Spatie\Permission\Models\Permission;
+
+class PermissionController extends Controller
 {
-
-    protected $code = -1;
-    
     /**
      * Display a listing of the resource.
      *
@@ -19,30 +17,26 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('Backend.Academics.category');
+        //
     }
 
-     /**
+    /**
      * Show the list for  resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function list()
     {
-        $model = OrderCategory::all();
+        $model = Permission::all();
 
         return DataTables::of($model)
                 ->addColumn('Actions', function($data) {
-                    return '@role("admin")
-                            <i class="fa fa-edit text-success fa-icon"
-                                onClick="editCategory(`'.$data->id.'`)">
-                                
+                    return '<i class="fa fa-edit text-success fa-icon"
+                                onClick="editPermission(`'.$data->id.'`)">
                             </i>
                             <i data-id="'.$data->id.'" class="fa fa-trash text-danger fa-icon"
-                                onClick="delData(`'.$data->id.'`, `academic_del_category`)">
-                                
-                            </i>
-                            @endrole';
+                                onClick="delData(`'.$data->id.'`, `permission_del`)">
+                            </i>';
                 })
                 ->rawColumns(['Actions'])
                 ->make(true);
@@ -64,12 +58,11 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, OrderCategory $order_category)
+    public function store(Request $request, Permission $permission)
     {
         $code = -1;
         $validator = \Validator::make($request->all(), [
             'name' => 'required',
-            'description' => 'required',
         ]);
         
         if ($validator->fails()) {
@@ -77,7 +70,7 @@ class CategoryController extends Controller
         }
 
         
-        if($order_category->storeData($request->all()) ){
+        if($permission->create($request->all()) ){
             $code = 1;
         }
 
@@ -112,7 +105,7 @@ class CategoryController extends Controller
         return response()->json([
             'code' => 1,
             'msg' => 'fetching data',
-            'data' => OrderCategory::find($id)
+            'data' => Permission::find($id)
         ]);
     }
 
@@ -127,7 +120,7 @@ class CategoryController extends Controller
     {
         //
         $code = -1;$msg='';$data=[];
-        if (OrderCategory::find($id)->update($request->all())) {
+        if (Permission::find($id)->update($request->all())) {
             $code = 1;$msg="Updated successfully";
         }
         return response()->json([
@@ -147,11 +140,11 @@ class CategoryController extends Controller
     {
         //
         $code = -1;
-        $order_category = new OrderCategory;
-        if($order_category->deleteData($id)){ $code = 1;}
+        $permission = Permission::where('id', $id)->delete();
+        if($permission){ $code = 1;}
         return response()->json([
             'code' => $code,
-            'msg' => 'OrderCategory deleted successfully',
+            'msg' => 'Permission deleted successfully',
             'data' => [] 
         ]);
     }

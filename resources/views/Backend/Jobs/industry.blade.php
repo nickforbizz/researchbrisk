@@ -10,7 +10,9 @@
 						<h5 class="text-white op-7 mb-2">Industries for Jobs</h5>
 					</div>
 					<div class="ml-md-auto py-2 py-md-0">
+                        @role("admin")
 						<a href="#" id="add_industry" class="btn btn-secondary btn-round">Add An Industry</a>
+                        @endrole
 					</div>
 				</div>
 			</div>

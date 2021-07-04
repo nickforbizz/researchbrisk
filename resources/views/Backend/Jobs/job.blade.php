@@ -10,8 +10,10 @@
 						<h5 class="text-white op-7 mb-2"> Jobs</h5>
 					</div>
 					<div class="ml-md-auto py-2 py-md-0">
+                        @role("admin")
 						<a href="{{ route('jobCategory') }}" class="btn btn-secondary btn-round">Add Category</a>
 						<a href="{{ route('jobIndustry') }}" class="btn btn-secondary btn-round">Add Industry</a>
+                        @endrole
 					</div>
 				</div>
 			</div>
@@ -27,7 +29,9 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
+                            @role("admin")
                             <a href="#"  id="add_job" class="btn btn-info btn-round float-right">Add Job</a>
+                            @endrole
                             <h4 class="card-title">Available Jobs</h4>
                         </div>
                         <div class="card-body">

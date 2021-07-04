@@ -10,7 +10,9 @@
 						<h5 class="text-white op-7 mb-2">Categories for Jobs</h5>
 					</div>
 					<div class="ml-md-auto py-2 py-md-0">
+                        @role("admin")
 						<a href="#" id="add_category" class="btn btn-secondary btn-round">Add Category</a>
+                        @endrole
 					</div>
 				</div>
 			</div>

@@ -33,14 +33,21 @@ class FormatController extends Controller
 
         return DataTables::of($model)
                 ->addColumn('Actions', function($data) {
-                    return '<i class="fa fa-edit text-success fa-icon"
-                                onClick="editFormat(`'.$data->id.'`)">
-                                
-                            </i>
-                            <i data-id="'.$data->id.'" class="fa fa-trash text-danger fa-icon"
-                                onClick="delData(`'.$data->id.'`, `academic_del_format`)">
-                                
-                            </i>';
+                    if(\Auth::user()->hasRole("admin")){
+
+                        $actions = '<i class="fa fa-edit text-success fa-icon"
+                                    onClick="editFormat(`'.$data->id.'`)">
+                                    
+                                </i>
+                                <i data-id="'.$data->id.'" class="fa fa-trash text-danger fa-icon"
+                                    onClick="delData(`'.$data->id.'`, `academic_del_format`)">
+                                    
+                                </i>';
+                    }else{
+                        $actions = "_ _";
+                    }
+
+                    return $actions;
                 })
                 ->rawColumns(['Actions'])
                 ->make(true);

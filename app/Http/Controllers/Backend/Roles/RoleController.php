@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Academics;
+namespace App\Http\Controllers\Backend\Roles;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DataTables;
-use App\Models\OrderCategory;
 
-class CategoryController extends Controller
+use Spatie\Permission\Models\Role;
+
+class RoleController extends Controller
 {
-
-    protected $code = -1;
-    
     /**
      * Display a listing of the resource.
      *
@@ -19,30 +17,26 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('Backend.Academics.category');
+        //
     }
 
-     /**
+    /**
      * Show the list for  resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function list()
     {
-        $model = OrderCategory::all();
+        $model = Role::all();
 
         return DataTables::of($model)
                 ->addColumn('Actions', function($data) {
-                    return '@role("admin")
-                            <i class="fa fa-edit text-success fa-icon"
-                                onClick="editCategory(`'.$data->id.'`)">
-                                
+                    return '<i class="fa fa-edit text-success fa-icon"
+                                onClick="editRole(`'.$data->id.'`)">
                             </i>
                             <i data-id="'.$data->id.'" class="fa fa-trash text-danger fa-icon"
-                                onClick="delData(`'.$data->id.'`, `academic_del_category`)">
-                                
-                            </i>
-                            @endrole';
+                                onClick="delData(`'.$data->id.'`, `role_del`)">
+                            </i>';
                 })
                 ->rawColumns(['Actions'])
                 ->make(true);
@@ -64,29 +58,36 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, OrderCategory $order_category)
+    public function store(Request $request, Role $role)
     {
         $code = -1;
         $validator = \Validator::make($request->all(), [
-            'name' => 'required',
-            'description' => 'required',
+            'name' => 'required|unique:roles',
         ]);
         
         if ($validator->fails()) {
-            return response()->json([ 'code' =>  $code,'errors' => $validator->errors()->all()]);
+            return response()->json([ 'code' =>  -1,'errors' => $validator->errors()->all()]);
         }
 
         
-        if($order_category->storeData($request->all()) ){
-            $code = 1;
+        if($role->create($request->all()) ){
+            return response()->json([
+                'code' =>  1,
+                'msg' => "Record added successfully",
+                'data' => [],
+            ]);
+    
         }
 
+
         return response()->json([
-            'code' =>  $code,
-            'msg' => "format added successfully",
+            'code' =>  -1,
+            'msg' => "Error adding record",
             'data' => [],
         ]);
 
+
+        
 
     }
 
@@ -112,7 +113,7 @@ class CategoryController extends Controller
         return response()->json([
             'code' => 1,
             'msg' => 'fetching data',
-            'data' => OrderCategory::find($id)
+            'data' => Role::find($id)
         ]);
     }
 
@@ -127,7 +128,7 @@ class CategoryController extends Controller
     {
         //
         $code = -1;$msg='';$data=[];
-        if (OrderCategory::find($id)->update($request->all())) {
+        if (Role::find($id)->update($request->all())) {
             $code = 1;$msg="Updated successfully";
         }
         return response()->json([
@@ -147,11 +148,11 @@ class CategoryController extends Controller
     {
         //
         $code = -1;
-        $order_category = new OrderCategory;
-        if($order_category->deleteData($id)){ $code = 1;}
+        $role = where('id', $id)->delete();;
+        if($role){ $code = 1;}
         return response()->json([
             'code' => $code,
-            'msg' => 'OrderCategory deleted successfully',
+            'msg' => 'Role deleted successfully',
             'data' => [] 
         ]);
     }

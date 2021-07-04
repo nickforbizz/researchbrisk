@@ -10,7 +10,9 @@
 						<h5 class="text-white op-7 mb-2">Categories for blogs</h5>
 					</div>
 					<div class="ml-md-auto py-2 py-md-0">
+                        @role("admin")
 						<a href="#" id="add_category" class="btn btn-secondary btn-round">Add Category</a>
+                        @endrole
 					</div>
 				</div>
 			</div>
@@ -139,7 +141,17 @@
                             time: 1000,
                         });
                     },
-                    error: (err) => { console.error(err)}
+                    error: (err) => { 
+                        console.error(err.responseJSON.message)
+                        $("#categoryModal").modal('hide');
+                        $.notify({
+                            icon: 'flaticon-alarm-1',
+                            message: err.responseJSON.message,
+                        },{
+                            type: 'error',
+                            time: 1000,
+                        });
+                    }
                 })
             })
     }); 
