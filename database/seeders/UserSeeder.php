@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\User;
 
 class UserSeeder extends Seeder
@@ -41,5 +43,20 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$NEysfslpjyL2KzZIhWP68.sIhiToUjRnDtV9P/qLFOWlRTz10NJzq', // password
             'remember_token' => Str::random(10),
         ]);
+
+
+
+        // Roles creation
+        Role::create(['name' => 'superadmin']);
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'user']);
+        Role::create(['name' => 'writer']);
+        Role::create(['name' => 'student']);
+
+
+        // assign roles to users
+        User::where('email', 'superadmin@researchbrisk.com')->first()->assignRole('superadmin');
+        User::where('email', 'admin@researchbrisk.com')->first()->assignRole('admin');
+        User::where('email', 'user@researchbrisk.com')->first()->assignRole('user');
     }
 }

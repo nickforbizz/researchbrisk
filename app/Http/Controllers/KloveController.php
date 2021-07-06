@@ -14,7 +14,7 @@ class KloveController extends Controller
 
     public function index(Request $request,$toString=null)
     {
-        $data[] = $this->getKloveCommands('mysql');
+        $data[] = $this->getKloveCommands('pgsql');
 
         if ($toString==null){
             return $data;

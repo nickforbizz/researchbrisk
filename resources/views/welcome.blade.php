@@ -7,14 +7,11 @@
 
                                 <div class="row mt-2 mb-2">
                                     <div class="col-sm-7 p-5">
-                                        <h3> Blogger and Academic Writer </h3>
+                                        <h3> GLOBAL RESEARCH AND EDUCATION HUB </h3>
                                         <hr>
-                                        <p class="text-justify pt-2">This is A Centre for All Experts. We Offer the best
-                                            Academic Writing Solutions at the Cheapest Prices and Quality Niched
-                                            Blogging. Get all Latest Jobs Updates and Connect Directly with Your
-                                            employer through our Job Application Solutions.</p>
+                                        <p class="text-justify pt-2">We Research, We Write. Get personalized Research Help in 100+ Fields. Also, find Your Dream Job Here..</p>
                                         <div>
-                                            <a class="btn btn-primary" href="{{ route('orderassignment') }}">Order an Assignment</a>
+                                            <a class="btn btn-primary btn-round" href="{{ route('orderassignment') }}">Order an Assignment</a>
                                         </div>
                                     </div>
 

@@ -38,16 +38,10 @@
 										</div>
 										<div class="card-body">
 											<div class="row">
-												@can('add role')
-												<div class="col-sm-6 p-2">
-													<button  class="btn btn-primary btn-round ml-2" id="add_role"  >Add Role</button>
-												</div>
-												@endcan
+												
 
 
-												<div class="col-sm-6 p-2">
-													<button  class="btn btn-primary btn-round ml-2" id="add_permission"  >Add permission</button>
-												</div>
+												
 
 												<div class="col-sm-6 p-2">
 													<button  class="btn btn-primary btn-round ml-2" data-toggle="modal" data-target="#role_permissionModal" >Assign permissions to Role</button>
@@ -86,8 +80,13 @@
 									<div class="tab-content" id="myTabContent">
 										<div class="tab-pane fade show active" id="approle" role="tabpanel" aria-labelledby="approle-tab">
 											
-											<div class="card">
+											<div class="card shadow">
 												<div class="card-header">
+													@can('add role')
+													<div>
+														<button  class="btn btn-primary btn-round ml-2 float-right" id="add_role"  >Add Role</button>
+													</div>
+													@endcan
 													<h4 class="card-title">Available Roles</h4>
 												</div>
 												<div class="card-body">
@@ -109,11 +108,14 @@
 											</div>
 
 										</div>
-
+										<!-- .tab-pane fade -->
 
 										<div class="tab-pane fade" id="apppermission" role="tabpanel" aria-labelledby="apppermission-tab">
-											<div class="card">
+											<div class="card shadow">
 												<div class="card-header">
+													<div>
+														<button  class="btn btn-primary btn-round ml-2 float-right" id="add_permission"  >Add permission</button>
+													</div>
 													<h4 class="card-title">Available Permission</h4>
 												</div>
 												<div class="card-body">
@@ -132,18 +134,71 @@
 													</div>
 												</div>
 											</div>
-										
+											<!-- .card shadow -->
 										</div>
+										<!-- .tab-pane fade -->
 
 
 
 										<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-											<div class="card">
+											<div class="card shadow">
 												<div class="card-header">
-													<h4 class="card-title">Other Details</h4>
+													<h4 class="card-title">Get User Roles/Permissions</h4>
 												</div>
 												<div class="card-body">
-													something
+													<div class="row">
+														<div class="col-md-4">
+															<form class="form row shadow p-2" id="rolePermission_form">
+																@csrf
+																<div class="form-group col-sm-12">
+																	<label for="rolePermission_userid">Select User:</label>
+																	<select name="rolePermission_userid" class="select2 form-control" id="rolePermission_userid" style="width: 100%" required>
+																		<option selected disabled>Choose your option</option>
+																		@foreach($users as $user)
+																			@if($user->id == \Auth::user()->id)
+																				<option value="{{ $user->id }}" selected> {{ $user->name }} </option>
+																			@else
+																				<option value="{{ $user->id }}"> {{ $user->name }} </option>
+																			@endif
+																		@endforeach
+																	</select>
+																</div>	
+
+																<div class="form-group col-sm-12">
+																	<label for="rolePermission_action">Select Roles/Permissions:</label>
+																	<select name="rolePermission_action" class="form-control" id="rolePermission_action" style="width: 100%" required>
+																		<option selected disabled>Choose your option</option>
+																		<option value="r" selected>Roles</option>
+																		<option value="p">Permissions</option>
+																	</select>
+																</div>	
+
+
+																<div class="col-sm-12">
+																<hr>
+																	<button type="submit" class="btn btn-primary">Submit</button>
+																</div>       
+															</form>
+														</div>
+														<div class="col-md-8">
+															<div class="shadow p-2">
+																<div class="table-responsive">
+																	<table id="tb_rolepermissions" class="display table table-striped table-hover" >
+																		<thead>
+																			<tr>
+																				<th>Name</th>
+																				<th>Guard</th>
+																				<th>Created At</th>
+																				<th>Actions</th>
+																				
+																			</tr>
+																		</thead>
+																		<tbody></tbody>
+																	</table>
+																</div>
+															</div>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -287,7 +342,7 @@
 								</button>
 							</div>
 							<div class="modal-body mb-3">
-								<form class="form row " id="role_give_permission_form" action="{{ route('userGiveRoles') }}" method="post">
+								<form class="form row " id="user_give_role_form" action="{{ route('userGiveRoles') }}" method="post">
 									@csrf
 									<!-- <input type="hidden" id="form_action" value="A">
 									<input type="hidden" id="row_id" > -->
@@ -334,8 +389,8 @@
 					<!-- .modal -->
 
 
-						<!-- user user_permissionsModal modal -->
-						<div class="modal fade" id="user_permissionsModal" tabindex="-1" role="dialog" aria-labelledby="user_permissionsModalLabel" aria-hidden="true">
+					<!-- user user_permissionsModal modal -->
+					<div class="modal fade" id="user_permissionsModal" tabindex="-1" role="dialog" aria-labelledby="user_permissionsModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 							<div class="modal-header">
@@ -403,6 +458,7 @@
 			/// call tables
 			authTbs('#tb_roles', "{{ route('roleList') }}");
 			authTbs('#tb_permissions', "{{ route('permissionList') }}");
+			authTbs('#tb_rolepermissions', "{{ route('userRolePermissions') }}");
 
 
             // roles
@@ -446,6 +502,18 @@
 
 
 
+			$("#rolePermission_form").submit((e) => {
+				e.preventDefault();
+				let payload = {
+					"rolePermission_userid": $("#rolePermission_userid").val(),
+					"rolePermission_action": $("#rolePermission_action").val(),
+				};
+				console.log(payload);
+				authTbs('#tb_rolepermissions', "{{ route('userRolePermissions') }}", payload);
+			})
+
+
+
 
 
 
@@ -471,7 +539,7 @@
                     success: (payload) => {
                         $('#tb_permissions').DataTable().ajax.reload();
                         console.log(payload);
-                        $("#roleModal").modal('hide');
+						$("#permissionModal").modal('hide')
                         let type = 'info'
                         if (payload.code != 1) {
                             type = 'danger'
@@ -494,7 +562,7 @@
 
 
 	// datatables
-	function authTbs(tb_id, route) {
+	function authTbs(tb_id, route, payload={}) {
 		$(tb_id).DataTable().destroy()
 		$(tb_id).DataTable({
                 processing: true,
@@ -503,7 +571,11 @@
                 pageLength: 5,
                 // scrollX: true,
                 "order": [[ 0, "desc" ]],
-                ajax: route,
+                "ajax":{
+					"url": route,
+					"type": 'GET',
+					"data": payload
+				},
                 columns: [
                     {data: 'name'},
                     {data: 'guard_name'},

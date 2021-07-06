@@ -6,38 +6,30 @@
 			<div class="page-inner py-5">
 				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 					<div>
-						<h2 class="text-white pb-2 fw-bold">Categories</h2>
-						<h5 class="text-white op-7 mb-2">Categories for blogs</h5>
+						<h2 class="text-white pb-2 fw-bold">Manage Users</h2>
+						<h5 class="text-white op-7 mb-2">We Research, We Write. Get personalized Research Help in 100+ Fields. Also, find Your Dream Job Here..</h5>
 					</div>
 					
 				</div>
 			</div>
 		</div>
+		
+		<div class="page-inner mt--5">
+			<div class="row mt--2">
+				<div class="col-md-12">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title"> Users Records</div>
 
-
-
-
-
-
-        <div class="page-inner">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="ml-md-auto py-2 py-md-0">
-                                @role("admin|writer")
-                                <a href="#" id="add_category" class="btn btn-secondary btn-round float-right">Add Category</a>
-                                @endrole
-                            </div>
-                            <h4 class="card-title">Available categories</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
+							<div class="table-responsive">
                                 <table id="basic-datatables" class="display table table-striped table-hover" >
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Description</th>
+                                            <th>Email</th>
+                                            <th>Created At</th>
+                                            <th>Status</th>
+                                            <th>Active</th>
                                             <th>Actions</th>
                                             
                                         </tr>
@@ -45,53 +37,51 @@
                                     <tbody></tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- // modal -->
-            <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel" aria-hidden="true">
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		
+			
+
+				<!-- // modal -->
+				<div class="modal fade" id="actdeactivateuserModal" tabindex="-1" role="dialog" aria-labelledby="actdeactivateuserModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="categoryModalLabel">Add | Edit category</h5>
+                        <h5 class="modal-title" id="actdeactivateuserModalLabel">Authorise User!</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+					<form action="{{ route('manageUsersActdeactivate') }}" method="get">
                     <div class="modal-body">
-                    <form class="form row " id="category_form">
-                        @csrf
-                        <input type="hidden" id="form_action" value="A">
-                        <input type="hidden" id="row_id" >
-                        <div class="form-group col-sm-12">
-                            <label for="category_name">Name:</label>
-                            <input type="name" name="name" class="form-control" placeholder="Enter name" id="category_name">
-                        </div>
-                        <div class="form-group col-sm-12">
-                            <label for="category_descr">Description:</label>
-                            <textarea name="description" class="form-control" cols="5" id="category_descr" placeholder="Enter description"></textarea>
-                        </div>
-                         <div class="col-sm-12">
-                         <hr>
-                            <button type="submit" class="btn btn-primary float-right">Submit</button>
-                         </div>       
-                    </form>
+					@csrf
+						<input type="hidden" name="user_id" class="form-control" id="actdeactivate_id" readonly>
+						<input type="hidden" name="rec_type" class="form-control" id="actdeactivate_rec_type" readonly>
+						<p class="text-danger" id="actdeactivate_msg"> </p>
                     </div>
-                   
+                    <div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Proceed</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+					</form>
                     </div>
                 </div>
             </div>
-        </div>
-		
-		
+
+			
+			
+		</div>
 	</div>
 @endsection
 
 @section('scripts')
 <script>
-    $(document).ready(function() {
+		$(document).ready(function() {
 			$('#basic-datatables').DataTable({
                 processing: true,
                 serverSide: true,
@@ -99,10 +89,13 @@
                 pageLength: 5,
                 // scrollX: true,
                 "order": [[ 0, "desc" ]],
-                ajax: "{{ route('blogCategoryList') }}",
+                ajax: "{{ route('manageUsersList') }}",
                 columns: [
                     {data: 'name'},
-                    {data: 'description'},
+                    {data: 'email'},
+                    {data: 'created_at'},
+                    {data: 'status'},
+                    {data: 'active'},
                     {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'},
                 ]
 			});
@@ -120,7 +113,7 @@
                 let form_action = $("#form_action").val();
                 let row_id = $("#row_id").val();
                 let action_url = '';
-                (form_action == 'A') ? action_url = "{{ route('blogCreateCategory')}}" : action_url = "blog_update_category/"+row_id;
+                // (form_action == 'A') ? action_url = "{{ route('blogCreateCategory')}}" : action_url = "blog_update_category/"+row_id;
                 $.ajax({
                     url: action_url,
                     method: "post",
@@ -177,6 +170,19 @@
             error: (err) => {console.error(err);}
         })
     }
+
+	// helper funcs
+	function activateDeactivate(id, rec_type) {
+			$("#actdeactivate_id").val(id);
+			$("#actdeactivate_rec_type").val(rec_type);
+
+			if(rec_type == 'active'){
+				$("#actdeactivate_msg").text("De activate user")
+			}else{
+				$("#actdeactivate_msg").text("Activate user")
+			}
+			$("#actdeactivateuserModal").modal()
+		}
 </script>
 @endsection
 			

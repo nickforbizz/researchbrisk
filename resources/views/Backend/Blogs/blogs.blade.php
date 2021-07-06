@@ -9,8 +9,8 @@
 						<h2 class="text-white pb-2 fw-bold">Blogs</h2>
 					</div>
 					<div class="ml-md-auto py-2 py-md-0">
-                        @role("admin")
-						<a href="#" id="add_blog" class="btn btn-secondary btn-round">Add Blog</a>
+                        @role("admin|writer")
+						    <a href="#" id="add_blog" class="btn btn-secondary btn-round">Add Blog</a>
                         @endrole
 					</div>
 				</div>
@@ -21,7 +21,7 @@
 
 
 
-
+ 
         <div class="page-inner">
 
         <div class="row">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                @role("admin")
+                                @role("admin|writer")
                                 <div class="col-sm-6 p-2">
                                     <button  class="btn btn-primary btn-round ml-2"  data-toggle="modal" data-target="#blogtag">Add Tags</button>
                                 </div>

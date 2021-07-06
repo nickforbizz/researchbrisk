@@ -7,11 +7,13 @@
 				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 					<div>
 						<h2 class="text-white pb-2 fw-bold">Dashboard</h2>
-						<h5 class="text-white op-7 mb-2">Free Bootstrap 4 Admin Dashboard</h5>
+						<h5 class="text-white op-7 mb-2">We Research, We Write. Get personalized Research Help in 100+ Fields. Also, find Your Dream Job Here..</h5>
 					</div>
 					<div class="ml-md-auto py-2 py-md-0">
+						@role('admin')
 						<a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
-						<a href="#" class="btn btn-secondary btn-round">Add Customer</a>
+						<a href="#" class="btn btn-secondary btn-round">Add User</a>
+						@endrole
 					</div>
 				</div>
 			</div>
@@ -26,12 +28,20 @@
 							<div class="card-category">Daily information about statistics in system</div>
 							<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
 								<div class="px-2 pb-2 pb-md-0 text-center">
-									<div id="circles-1"></div>
-									<h6 class="fw-bold mt-3 mb-0">New Users</h6>
+									<div id="active_users_circle"></div>
+									<h6 class="fw-bold mt-3 mb-0">Active Users</h6>
 								</div>
 								<div class="px-2 pb-2 pb-md-0 text-center">
-									<div id="circles-2"></div>
-									<h6 class="fw-bold mt-3 mb-0">Sales</h6>
+									<div id="blogs_circle"></div>
+									<h6 class="fw-bold mt-3 mb-0">Blogs</h6>
+								</div>
+								<div class="px-2 pb-2 pb-md-0 text-center">
+									<div id="jobs_circle"></div>
+									<h6 class="fw-bold mt-3 mb-0">Jobs</h6>
+								</div>
+								<div class="px-2 pb-2 pb-md-0 text-center">
+									<div id="orders_circle"></div>
+									<h6 class="fw-bold mt-3 mb-0">Orders</h6>
 								</div>
 								<div class="px-2 pb-2 pb-md-0 text-center">
 									<div id="circles-3"></div>
@@ -44,42 +54,11 @@
 
 
 			</div>
+		
+			
+			
 			<div class="row">
 				<div class="col-md-12">
-					<div class="card">
-						<div class="card-header">
-							<div class="card-head-row">
-								<div class="card-title">User Statistics  </div>
-								<div class="card-tools">
-									<a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
-										<span class="btn-label">
-											<i class="fa fa-pencil"></i>
-										</span>
-										Export
-									</a>
-									<a href="#" class="btn btn-info btn-border btn-round btn-sm">
-										<span class="btn-label">
-											<i class="fa fa-print"></i>
-										</span>
-										Print
-									</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="chart-container" style="min-height: 375px">
-								<canvas id="statisticsChart"></canvas>
-							</div>
-							<div id="myChartLegend"></div>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-			
-			
-			<div class="row">
-				<div class="col-md-6">
 					<div class="card full-height">
 						<div class="card-header">
 							<div class="card-title">Feed Activity</div>
@@ -114,94 +93,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<div class="card full-height">
-						<div class="card-header">
-							<div class="card-head-row">
-								<div class="card-title">Support Tickets</div>
-								<div class="card-tools">
-									<ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab" role="tablist">
-										<li class="nav-item">
-											<a class="nav-link" id="pills-today" data-toggle="pill" href="#pills-today" role="tab" aria-selected="true">Today</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link active" id="pills-week" data-toggle="pill" href="#pills-week" role="tab" aria-selected="false">Week</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" id="pills-month" data-toggle="pill" href="#pills-month" role="tab" aria-selected="false">Month</a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="d-flex">
-								<div class="avatar avatar-online">
-									<span class="avatar-title rounded-circle border border-white bg-info">J</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Joko Subianto <span class="text-warning pl-3">pending</span></h6>
-									<span class="text-muted">I am facing some trouble with my viewport. When i start my</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">8:40 PM</small>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar avatar-offline">
-									<span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Prabowo Widodo <span class="text-success pl-3">open</span></h6>
-									<span class="text-muted">I have some query regarding the license issue.</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">1 Day Ago</small>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar avatar-away">
-									<span class="avatar-title rounded-circle border border-white bg-danger">L</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Lee Chong Wei <span class="text-muted pl-3">closed</span></h6>
-									<span class="text-muted">Is there any update plan for RTL version near future?</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">2 Days Ago</small>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar avatar-offline">
-									<span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Peter Parker <span class="text-success pl-3">open</span></h6>
-									<span class="text-muted">I have some query regarding the license issue.</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">2 Day Ago</small>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar avatar-away">
-									<span class="avatar-title rounded-circle border border-white bg-danger">L</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Logan Paul <span class="text-muted pl-3">closed</span></h6>
-									<span class="text-muted">Is there any update plan for RTL version near future?</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">2 Days Ago</small>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -210,12 +102,12 @@
 @section('scripts')
 <script>
 		Circles.create({
-			id:'circles-1',
+			id:'active_users_circle',
 			radius:45,
-			value:60,
+			value:"{{ count($active_users) / count($users) * 100 }}",
 			maxValue:100,
 			width:7,
-			text: 5,
+			text: "{{ count($active_users) }}",
 			colors:['#f1f1f1', '#FF9E27'],
 			duration:400,
 			wrpClass:'circles-wrp',
@@ -225,13 +117,43 @@
 		})
 
 		Circles.create({
-			id:'circles-2',
+			id:'blogs_circle',
 			radius:45,
 			value:70,
 			maxValue:100,
 			width:7,
-			text: 36,
+			text: "{{ count($blogs) }}",
 			colors:['#f1f1f1', '#2BB930'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'jobs_circle',
+			radius:45,
+			value:70,
+			maxValue:100,
+			width:7,
+			text: "{{ count($jobs) }}",
+			colors:['#f1f1f1', '#1269db'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'orders_circle',
+			radius:45,
+			value:70,
+			maxValue:100,
+			width:7,
+			text: "{{ count($orders) }}",
+			colors:['#f1f1f1', '#c1ec14'],
 			duration:400,
 			wrpClass:'circles-wrp',
 			textClass:'circles-text',

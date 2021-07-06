@@ -109,42 +109,8 @@
 													<span class="time">5 minutes ago</span> 
 												</div>
 											</a>
-											<a href="#">
-												<div class="notif-img"> 
-													<img src="{{ asset('backend/img/chadengle.jpg') }}" alt="Img Profile">
-												</div>
-												<div class="notif-content">
-													<span class="subject">Chad</span>
-													<span class="block">
-														Ok, Thanks !
-													</span>
-													<span class="time">12 minutes ago</span> 
-												</div>
-											</a>
-											<a href="#">
-												<div class="notif-img"> 
-													<img src="{{ asset('backend/img/mlane.jpg') }}" alt="Img Profile">
-												</div>
-												<div class="notif-content">
-													<span class="subject">Jhon Doe</span>
-													<span class="block">
-														Ready for the meeting today...
-													</span>
-													<span class="time">12 minutes ago</span> 
-												</div>
-											</a>
-											<a href="#">
-												<div class="notif-img"> 
-													<img src="{{ asset('backend/img/talha.jpg') }}" alt="Img Profile">
-												</div>
-												<div class="notif-content">
-													<span class="subject">Talha</span>
-													<span class="block">
-														Hi, Apa Kabar ?
-													</span>
-													<span class="time">17 minutes ago</span> 
-												</div>
-											</a>
+											
+											
 										</div>
 									</div>
 								</li>
@@ -174,35 +140,7 @@
 													<span class="time">5 minutes ago</span> 
 												</div>
 											</a>
-											<a href="#">
-												<div class="notif-icon notif-success"> <i class="fa fa-comment"></i> </div>
-												<div class="notif-content">
-													<span class="block">
-														Rahmad commented on Admin
-													</span>
-													<span class="time">12 minutes ago</span> 
-												</div>
-											</a>
-											<a href="#">
-												<div class="notif-img"> 
-													<img src="{{ asset('backend/img/profile2.jpg') }}" alt="Img Profile">
-												</div>
-												<div class="notif-content">
-													<span class="block">
-														Reza send messages to you
-													</span>
-													<span class="time">12 minutes ago</span> 
-												</div>
-											</a>
-											<a href="#">
-												<div class="notif-icon notif-danger"> <i class="fa fa-heart"></i> </div>
-												<div class="notif-content">
-													<span class="block">
-														Farrah liked Admin
-													</span>
-													<span class="time">17 minutes ago</span> 
-												</div>
-											</a>
+											
 										</div>
 									</div>
 								</li>
@@ -229,36 +167,7 @@
 													<span class="text">Generated Report</span>
 												</div>
 											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
-												<div class="quick-actions-item">
-													<i class="flaticon-database"></i>
-													<span class="text">Create New Database</span>
-												</div>
-											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
-												<div class="quick-actions-item">
-													<i class="flaticon-pen"></i>
-													<span class="text">Create New Post</span>
-												</div>
-											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
-												<div class="quick-actions-item">
-													<i class="flaticon-interface-1"></i>
-													<span class="text">Create New Task</span>
-												</div>
-											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
-												<div class="quick-actions-item">
-													<i class="flaticon-list"></i>
-													<span class="text">Completed Tasks</span>
-												</div>
-											</a>
-											<a class="col-6 col-md-4 p-0" href="#">
-												<div class="quick-actions-item">
-													<i class="flaticon-file"></i>
-													<span class="text">Create New Invoice</span>
-												</div>
-											</a>
+											
 										</div>
 									</div>
 								</div>
@@ -314,7 +223,7 @@
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
 									{{ Auth::user()->name }}
-									<span class="user-level">Administrator</span>
+									<span class="user-level">{{ Auth::user()->email }}</span>
 									<span class="caret"></span>
 								</span>
 							</a>
@@ -349,7 +258,7 @@
                             </a>							
 						</li>
 
-						
+						@role("admin|student")
 						<li class="nav-item {{ (request()->routeIs('academic*')) ? 'active' : '' }}">
 							<a data-toggle="collapse" href="#academics">
 								<p>Academics</p>
@@ -375,7 +284,9 @@
 								</ul>
 							</div>
 						</li>
+						@endrole
 
+						@role("admin|writer")
                         <li class="nav-item {{ (request()->routeIs('blog*')) ? 'active' : '' }}">
 							<a data-toggle="collapse" href="#blogs">
 								<p>Blogs</p>
@@ -396,6 +307,7 @@
 								</ul>
 							</div>
 						</li>
+						@endrole
 
 						@role('admin')
 						<li class="nav-item {{ (request()->routeIs('job*')) ? 'active' : '' }}">
@@ -425,6 +337,12 @@
 						</li>
 
                         <li class="nav-item">
+							<a href="{{ route('manageUsers') }}">
+								<p>Users</p>
+							</a> 
+                        </li>
+
+						<li class="nav-item">
 							<a href="{{ route('settings') }}">
 								<p>Settings</p>
 							</a> 

@@ -104,7 +104,9 @@
                                 </div>
                                 <div class="col-sm-12">
                                 <hr>
+                                    @role("admin|writer")
                                     <button type="submit" class="btn btn-primary float-right ml-2">Submit</button>
+                                    @endrole
                                 </div>       
                             </form>
 
@@ -139,7 +141,7 @@
 		
 		
 	</div>
-@endsection
+@endsection 
 
 @section('scripts')
 <script src="https://cdn.tiny.cloud/1/4u3cmri3397u1tzsz152g7glvdjkfwp1sj0uph3ng27nqet8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
