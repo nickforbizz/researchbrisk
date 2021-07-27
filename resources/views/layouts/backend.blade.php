@@ -258,7 +258,7 @@
                             </a>							
 						</li>
 
-						@role("admin|student")
+						@role("superadmin|admin|student")
 						<li class="nav-item {{ (request()->routeIs('academic*')) ? 'active' : '' }}">
 							<a data-toggle="collapse" href="#academics">
 								<p>Academics</p>
@@ -286,7 +286,7 @@
 						</li>
 						@endrole
 
-						@role("admin|writer")
+						@role("superadmin|admin|writer")
                         <li class="nav-item {{ (request()->routeIs('blog*')) ? 'active' : '' }}">
 							<a data-toggle="collapse" href="#blogs">
 								<p>Blogs</p>
@@ -309,7 +309,7 @@
 						</li>
 						@endrole
 
-						@role('admin')
+						@role('superadmin|admin')
 						<li class="nav-item {{ (request()->routeIs('job*')) ? 'active' : '' }}">
 							<a data-toggle="collapse" href="#jbs">
 								<p>Jobs</p>

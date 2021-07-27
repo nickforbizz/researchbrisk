@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                 <hr>
-                                    @role("admin|writer")
+                                    @role("superadmin|admin|writer")
                                     <button type="submit" class="btn btn-primary float-right ml-2">Submit</button>
                                     @endrole
                                 </div>       

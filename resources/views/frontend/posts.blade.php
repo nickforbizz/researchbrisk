@@ -8,7 +8,7 @@
     <div class="">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8 mt-5">
+                <div class="col-sm-8 shadow mt-5">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             @foreach($news as $new)
@@ -18,7 +18,7 @@
                         </ol>
                         <div class="carousel-inner br-6">
                             @foreach($news as $new)
-                                <div class="carousel-item {{$loop->iteration == 1 ? 'active' : '' }}">
+                                <div class="carousel-item {{$loop->iteration == 1 ? 'active' : '' }} ">
                                     <img src="{{ asset(str_replace('public', 'storage',$new->media_link)) }}" class="d-block w-100" alt="{{ $new->media_link }}" style="opacity: 0.8;"/>
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5> {{ $new->blogCategory->name }} </h5>

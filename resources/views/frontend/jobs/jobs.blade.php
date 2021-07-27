@@ -7,16 +7,16 @@
     <section class="">
             <div class="alert text-uppercase" style="background-color: #0acc79">
                 <div class="container">
-                    <form class="form-inline mt-5 pt-3 justify-content-center">
+                    <form action="{{ route('searchJobs') }}" class="form-inline mt-5 pt-3 justify-content-center">
                         <div class="form-group mb-2 Xmx-sm-2">
                             <b class="display-5"> Find a Job </b>
                         </div>
                         <div class="form-group mb-2 mx-sm-2">
                             <select
-                                name=""
+                                name="category"
                                 class="select2 form-control"
                                 id=""
-                                style="width: 20rem"
+                                required
                             >
                                 <option selected disabled>--select Category--</option>
                                 @foreach($categories as $category)
@@ -26,10 +26,10 @@
                         </div>
                         <div class="form-group mb-2 mx-sm-2">
                             <select
-                                name=""
+                                name="industry"
                                 class="select2 form-control"
                                 id=""
-                                style="width: 20rem;"
+                                required
                             >
                                 <option selected disabled>--select Industry--</option>
                                 @foreach($industries as $industry)

@@ -6,12 +6,12 @@
     <div class="container">
         <div class="row mt-5 mb-5">
             <div class="col-sm-12 -bottom-8">
-                <h5 class="primary-color btr-6 p-3">Academic Services</h5>
+                <h5 class="primary-color btr-6 p-3 text-center">Academic Services</h5>
             </div>
             <div class="col-sm-12">
                 <div class="card p-3">
                     <article class="row mb-4 services-cards">
-                        <div class="col-sm-4 arow">
+                        <div class="col-sm-6 mb-5 arow">
                             <div class="acol-md-12">
                                 <div class="row space-16">&nbsp;</div>
                                 <div class="row">
@@ -43,7 +43,7 @@
                                                 </div>
                                             </div>
                                             <div class="caption card-footer text-right">
-                                                <i>academics@researchbrisk.com</i>
+                                                <!-- <i>academics@researchbrisk.com</i> -->
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-4 arow">
+                        <div class="col-sm-6 mb-5 arow">
                             <div class="acol-md-12">
                                 <div class="row space-16">&nbsp;</div>
                                 <div class="row">
@@ -80,14 +80,14 @@
                                                 </div>
                                             </div>
                                             <div class="caption card-footer text-right">
-                                                <i>support@researchbrisk.com</i>
+                                                <!-- <i>support@researchbrisk.com</i> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4 arow">
+                        <div class="col-sm-6 mb-5 arow">
                             <div class="acol-md-12">
                                 <div class="row space-16">&nbsp;</div>
                                 <div class="row">
@@ -118,14 +118,14 @@
                                                 </div>
                                             </div>
                                             <div class="caption card-footer text-right">
-                                                <i>recruitment@researchbrisk.com</i>
+                                                <!-- <i>recruitment@researchbrisk.com</i> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4 arow">
+                        <div class="col-sm-6 mb-5 arow">
                             <div class="acol-md-12">
                                 <div class="row space-16">&nbsp;</div>
                                 <div class="row">
@@ -148,14 +148,14 @@
                                                 </div>
                                             </div>
                                             <div class="caption card-footer text-right">
-                                                <i>blogs@researchbrisk.com</i>
+                                                <!-- <i>blogs@researchbrisk.com</i> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4 arow">
+                        <div class="col-sm-6 mb-5 arow">
                             <div class="acol-md-12">
                                 <div class="row space-16">&nbsp;</div>
                                 <div class="row">
@@ -183,7 +183,7 @@
                                                 </div>
                                             </div>
                                             <div class="caption card-footer text-right">
-                                                <i>support@researchbrisk.com</i>
+                                                <!-- <i>support@researchbrisk.com</i> -->
                                             </div>
                                         </div>
                                     </div>

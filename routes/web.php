@@ -29,6 +29,7 @@ Route::get('/posts', 'frontend\frontendController@viewPosts')->name('posts');
 Route::get('/post/{id}/{slug}', 'frontend\frontendController@singlePost')->name('post');
 Route::post('/post_comments', 'frontend\frontendController@createPostComments')->name('postComments');
 Route::get('/jobs', 'frontend\frontendController@viewJobs')->name('jobs');
+Route::get('/search_jobs', 'frontend\frontendController@searchJobs')->name('searchJobs');
 Route::get('/job/{id}', 'frontend\frontendController@viewSingleJob')->name('singlejob');
 Route::get('/about', 'frontend\frontendController@viewAbout')->name('about');
 Route::get('/contact', 'frontend\frontendController@viewContact')->name('contact');

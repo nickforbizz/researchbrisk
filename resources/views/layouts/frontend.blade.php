@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="{{ asset('/css/bootstrap4.min.css') }}" >
     <link rel="stylesheet" href="{{ asset('/css/fontawesome4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/font-awesome-4.7.0/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/master.css') }}">
     <link rel="stylesheet" href="{{ asset('common/css/toastr.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('common/css/select2.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('/css/master.css') }}">
     <style>
         body{
             background: #f1f1f1;
@@ -58,7 +59,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">About </a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('posts') }}">Posts </a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('jobs') }}">Jobs</a></li>
                     @auth
@@ -165,7 +166,10 @@
 
 
     $(document).ready(function() {
-        $('.select2').select2();
+        $('.select2').select2({
+            theme:"bootstrap",
+            allowClear: true
+        });
     });
 </script>
 

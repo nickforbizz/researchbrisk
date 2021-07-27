@@ -72,11 +72,11 @@
                                 <hr>
                             </div>
                             <div class="col-sm-12">
-                                <figure class="figure w-100"><img
+                                <figure class="figure w-100 shadow"><img
                                         src="{{ asset(str_replace('public', 'storage',$blog->media_link)) }}"
                                         class="figure-img img-fluid rounded w-100"
                                         alt="{{ $blog->title }}">
-                                    <figcaption class="figure-caption text-lowercase">{{ $blog->description }}</figcaption>
+                                    <figcaption class="figure-caption text-capitalize text-center">{{ $blog->description }}</figcaption>
                                 </figure>
                             </div>
                             <div class="col-sm-12">

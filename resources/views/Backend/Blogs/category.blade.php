@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="ml-md-auto py-2 py-md-0">
-                                @role("admin|writer")
+                                @role("superadmin|admin|writer")
                                 <a href="#" id="add_category" class="btn btn-secondary btn-round float-right">Add Category</a>
                                 @endrole
                             </div>

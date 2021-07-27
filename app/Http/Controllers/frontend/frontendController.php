@@ -84,6 +84,59 @@ class frontendController extends Controller
         return view('frontend.jobs.jobs', compact('categories', 'industries', 'jobs'));
     }
 
+
+     /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function searchJobs(Request $request)
+    {
+        
+        $validator = \Validator::make($request->all(), [
+            'category' => 'required',
+            'industry' => 'required',
+        ]);
+        
+        if ($validator->fails()) {
+            $notification = array(
+                'message' => 'validation error on the fields, select both fields',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+
+
+        $categories = JobCategory::where('status', 1)->get();
+        $industries = JobIndustry::where('status', 1)->get();
+        $jobs = Job::where('status', 1)
+                    ->where('job_category_id', $request->category)
+                    ->where('job_industry_id', $request->industry)
+                    ->paginate(10);
+
+
+        
+        
+        if(count($jobs) < 1){
+            return  redirect()->route('jobs')->with([
+                'message' => 'No data was found, redirected to Jobs Page ',
+                'alert-type' => 'info'
+                
+            ]);
+        }
+        
+        $notification = array(
+            'message' => 'success fetched record/s',
+            'alert-type' => 'success'
+        );
+
+
+        return view('frontend.jobs.jobs', compact('categories', 'industries', 'jobs'))->with($notification);
+    }
+
+
+
+
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

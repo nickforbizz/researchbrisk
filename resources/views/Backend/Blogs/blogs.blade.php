@@ -9,7 +9,7 @@
 						<h2 class="text-white pb-2 fw-bold">Blogs</h2>
 					</div>
 					<div class="ml-md-auto py-2 py-md-0">
-                        @role("admin|writer")
+                        @role("superadmin|admin|writer")
 						    <a href="#" id="add_blog" class="btn btn-secondary btn-round">Add Blog</a>
                         @endrole
 					</div>
