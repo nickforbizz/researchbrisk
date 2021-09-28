@@ -16,7 +16,7 @@ class CreateUsersCopyTable extends Migration
         Schema::create('users_copy', function (Blueprint $table) {
             $table->integer('id', true);
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email',10)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('active')->default(0);
