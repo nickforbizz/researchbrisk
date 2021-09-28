@@ -26,7 +26,7 @@ class CreatePermissionTables extends Migration
             $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
             $table->timestamps();
 
-            $table->unique(['name', 'guard_name']);
+            $table->unique(['name', 'guard_name'], 100);
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
