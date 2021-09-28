@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\BlogsComment;
 use App\Models\Job;
+use App\Models\Enquiry;
 use App\Models\JobCategory;
 use App\Models\JobIndustry;
 use App\Models\OrderFormat;
@@ -42,7 +43,7 @@ class frontendController extends Controller
         $blog = Blog::where('uuid', $id)->first();
         
         if (!$blog) {
-            abort();
+            abort(404);
         }
         // return $blog->blogTagsPivots;
         $blogs = Blog::where('status', 1)->get();
@@ -274,6 +275,26 @@ class frontendController extends Controller
     public function clientPostOrder(Request $request)
     {
         return $request;
+    }
+
+
+    public function postEnquiry(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'names' => 'required',
+            'email' => 'required',
+            'msg' => 'required',
+        ]);
+
+        // return $request;
+        
+        if ($validator->fails()) {
+            $notification = array(
+                'message' => 'validation error on the fields',
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
     }
 
 

@@ -34,6 +34,6 @@ class NilOrder extends Model
      * 
      * @var string
      */
-    protected $connection = 'pgsql';
+    protected $connection = 'mysql';
 
 }

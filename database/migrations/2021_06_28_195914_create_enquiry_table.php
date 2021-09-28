@@ -15,8 +15,10 @@ class CreateEnquiryTable extends Migration
     {
         Schema::create('enquiry', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->string('email', 50)->default('0');
+            $table->text('names');
+            $table->string('email', 50);
             $table->text('subject');
+            $table->text('service_id');
             $table->text('message');
             $table->integer('status')->default(1);
             $table->integer('archived')->default(0);

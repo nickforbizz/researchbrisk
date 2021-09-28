@@ -7,14 +7,18 @@
     <section class="">
             <div class="alert text-uppercase" style="background-color: #0acc79">
                 <div class="container">
-                    <form action="{{ route('searchJobs') }}" class="form-inline mt-5 pt-3 justify-content-center">
-                        <div class="form-group mb-2 Xmx-sm-2">
-                            <b class="display-5"> Find a Job </b>
+
+
+                    <form action="{{ route('searchJobs') }}" class="form-inline mt-5 pt-3 justify-content-center row">
+
+                        <div class="form-group mb-2 Xmx-sm-2 col-sm-2">
+                            <b class="display-5"> Find a Job: </b>
                         </div>
-                        <div class="form-group mb-2 mx-sm-2">
+
+                        <div class="form-group mb-2  col-sm-4">
                             <select
                                 name="category"
-                                class="select2 form-control"
+                                class="select2 form-control w-100"
                                 id=""
                                 required
                             >
@@ -24,10 +28,11 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group mb-2 mx-sm-2">
+
+                        <div class="form-group mb-2 col-sm-4">
                             <select
                                 name="industry"
-                                class="select2 form-control"
+                                class="select2 form-control w-100"
                                 id=""
                                 required
                             >
@@ -37,10 +42,15 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-success mb-2">
-                            SEARCH
-                        </button>
+                        
+                        <div class="form-group mb-2 col-sm-2">
+                            <button type="submit" class="btn btn-success mb-2">
+                                SEARCH
+                            </button>
+                        </div>
                     </form>
+
+
                 </div>
             </div>
 

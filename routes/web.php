@@ -38,6 +38,7 @@ Route::get('/contact', 'frontend\frontendController@viewContact')->name('contact
 // academic
 Route::get('/orderassignment', 'frontend\frontendController@viewAcademicplaceorder')->name('orderassignment');
 Route::post('/orderassignment', 'frontend\frontendController@viewAcademicplaceorder')->name('orderassignment');
+Route::post('/enquiry', 'frontend\frontendController@postEnquiry')->name('enquiry');
 
 Route::get('/academicbio', 'frontend\frontendController@viewAcademicbio')->name('academicbio');
 Route::get('/academicpayrates', 'frontend\frontendController@viewAcademicpayrates')->name('academicpayrates');

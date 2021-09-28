@@ -32,7 +32,7 @@ class GuestOrderDoc extends Model
      * 
      * @var string
      */
-    protected $connection = 'pgsql';
+    protected $connection = 'mysql';
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

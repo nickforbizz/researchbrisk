@@ -47,7 +47,7 @@
 
                                 <div class="form-group">
                                     <label for="msg">Message</label>
-                                    <textarea class="form-control" name="msg" id="msg" aria-label="With textarea"></textarea>
+                                    <textarea class="form-control" name="msg" id="msg" placeholder="Enter your message" aria-label="With textarea"></textarea>
                                 </div>
 
 
@@ -59,10 +59,22 @@
 
                         <div class="col-md-6">
 
-                            <div class="card shadow p-4 mt-5">
-                                <p class="pt-5">Address: <small class="text-muted">Venkatadri IT Park, HP Avenue, Konnappana, Electronic city, Bengaluru, Karnataka 560069</small></p>
-                                <p class="pt-5">Email: <small class="text-muted">hire@luxurytaxicab.com</small></p>
-                                <p class="pt-5">Contact: <small class="text-muted">+91 98765 10278 || +91 76589 14244</small></p>
+                            <div class="card shadow p-4 mt-3">
+
+                                
+                                <div class="pt-3 text-center"> 
+                                    <div class=""> <i class="fa fa-envelope fl_icon"></i> </div>
+                                    <small class="text-muted">hire@luxurytaxicab.com</small>
+                                </div>
+                                
+                                <div class="pt-5 text-center"> 
+                                    <div class=""> <i class="fa fa-address-card fl_icon" aria-hidden="true"></i>   </div>
+                                    <small class="text-muted">Venkatadri IT Park, HP Avenue, Konnappana, Electronic city, Bengaluru, Karnataka 560069</small>
+                                </div>
+                                <div class="pt-5 text-center"> 
+                                    <div class=""> <i class="fa fa-phone-square fl_icon" aria-hidden="true"></i> </div>
+                                    <small class="text-muted">+91 98765 10278 || +91 76589 14244</small>
+                                </div>
                             </div>
                             
                         </div>
