@@ -11,6 +11,8 @@ use App\Models\Job;
 use App\Models\Enquiry;
 use App\Models\JobCategory;
 use App\Models\JobIndustry;
+use App\Models\NilOrder;
+use App\Models\NilOrderDoc;
 use App\Models\OrderFormat;
 use App\Models\OrderCategory;
 
@@ -93,7 +95,7 @@ class frontendController extends Controller
     public function searchJobs(Request $request)
     {
         
-        $validator = \Validator::make($request->all(), [
+        $validator = \Validator::make($request->all(), [ 
             'category' => 'required',
             'industry' => 'required',
         ]);
@@ -181,7 +183,66 @@ class frontendController extends Controller
      */
     public function viewAcademicplaceorder(Request $request)
     {
-        
+        if ($request->isMethod('post')) {
+            $validator = \Validator::make($request->all(), [
+                'title' => 'required',
+                'email' => 'required',
+                'category_id' => 'required',
+                'format_id' => 'required',
+                'language_id' => 'required',
+                'pages' => 'required',
+                'word_count' => 'required',
+            ]);
+    
+            // return $request;
+            
+            if ($validator->fails()) {
+                $notification = array(
+                    'message' => 'validation error on the fields',
+                    'alert-type' => 'error'
+                );
+                return back()->with($notification);
+            }
+            $order_number = NilOrder::max('order_number') + 1;
+            $nil_order = NilOrder::create([
+                'user_id' => $request->user_id,
+                'order_category_id' => $request->category_id,
+                'order_format_id' => $request->format_id,
+                'order_language_id' => $request->language_id,
+                'pages' => $request->pages,
+                'email' => $request->email,
+                'title' => $request->title,
+                'word_count' => $request->word_count,
+                'order_number' => $order_number,
+                'nil' => $request->nil,
+            ]);
+    
+            if ($nil_order) {
+                if($request->hasFile('files')){
+                    // return $request->file('files');
+                    foreach ($request->file('files') as $doc){
+                        NilOrderDoc::create([
+                            'user_id'=>$request->user_id,
+                            'order_id'=>$model->id,
+                            'name'=>$doc->getClientOriginalName(),
+                            'media_link'=>Storage::putFile('public/orders', $doc),
+                            'sys_name'=>$doc,
+                            'extension'=>$doc->getClientOriginalExtension(),
+                            'type'=>$doc->getClientOriginalExtension()
+                        ]);
+                    }
+                }
+                $notification = array(
+                    'message' => 'Record saved successfully',
+                    'alert-type' => 'success'
+                );
+            }else{
+                $notification = array(
+                    'message' => 'Unaable to save Record',
+                    'alert-type' => 'error'
+                );
+            }
+        }
         $formats = OrderFormat::where('status', 1)->get();
         $categories = OrderCategory::where('status', 1)->get();
         return view('frontend.academic.orderassignment', compact('formats', 'categories'));

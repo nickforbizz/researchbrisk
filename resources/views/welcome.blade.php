@@ -27,13 +27,13 @@
                                             </ol>
                                             <div class="carousel-inner br-6">
                                                 @foreach($news as $new)
-                                                    <div class="carousel-item {{$loop->iteration == 1 ? 'active' : '' }}">
+                                                    <a class="carousel-item {{$loop->iteration == 1 ? 'active' : '' }}" href="{{ route('post', ['id'=>$new->uuid, 'slug'=>$new->slug]) }}">
                                                         <img src="{{ asset(str_replace('public', 'storage',$new->media_link)) }}" class="d-block w-100" alt="{{ $new->media_link }}" style="opacity: 0.8;"/>
                                                         <div class="carousel-caption d-none d-md-block">
                                                             <h5> {{ $new->blogCategory->name }} </h5>
                                                             <p> {{ $new->title }} </p>
                                                         </div>
-                                                    </div>
+                                                    </a>
                                                 @endforeach
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -93,19 +93,19 @@
                                     
                                 <div class="card mb-3">
                                     <div class="row no-gutters" style="overflow: hidden; position: relative;">
-                                        <div class="col-sm-12 col-md-4 cover_img" style="overflow: hidden; position: relative; background: url('{{ asset(str_replace('public', 'storage',$blog->media_link)) }}');">
-                                        </div>
+                                        <a  class="col-sm-12 col-md-4 cover_img" style="overflow: hidden; position: relative; background: url('{{ asset(str_replace('public', 'storage',$blog->media_link)) }}');" href="{{ route('post', ['id'=>$blog->uuid, 'slug'=>$blog->slug]) }}">
+                                            
+                                        </a>
                                         <div class="col-sm-12 col-md-8">
                                             <div class="card-body">
+                                            <a  href="{{ route('post', ['id'=>$blog->uuid, 'slug'=>$blog->slug]) }}">
                                                 <h6 class="card-title"> {{ $blog->title }} </h6>
-
+                                            </a>
                                                 <p class="card-text" style="overflow: hidden; max-height: 4rem;">{{ $blog->description }}</p>
                                                 
                                                 <hr>
                                                 <div>
-                                                    <a class="btn btn-sm btn-info float-right primary-color" href="{{ route('post', ['id'=>$blog->uuid, 'slug'=>$blog->slug]) }}">
-                                                        view 
-                                                    </a>
+                                                    
                                                     <p class="card-text">
                                                         <small class="text-muted"> <time datetime="{{ $blog->created_at }}"> {{ $blog->created_at }} </time></small>
                                                         | <i class="text-muted">By {{ $blog->user->name }}</i>

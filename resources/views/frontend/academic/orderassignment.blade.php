@@ -12,10 +12,13 @@
             <div class="col-sm-12">
                 <div class="card p-3">
                     <form
+                        method="post"
+                        action="{{ route('orderassignment') }}"
                         enctype="multipart/form-data"
                         id="nil_order"
                         class="form row"
                     >
+                        @csrf
                         <input type="hidden" name="user_id" value="00" /><input
                             type="hidden"
                             name="nil"
@@ -130,7 +133,7 @@
                                 type="file"
                                 id="docs"
                                 class="form-control"
-                                name="file"
+                                name="files"
                                 multiple=""
                             />
                         </div>
